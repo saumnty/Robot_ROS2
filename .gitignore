@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+
+# MATLAB
+slprj/
+*.asv
+
+# ROS2
+build/
+install/
+log/
+
+# Linux
+*.swp
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Gazebo
+*.db
+
+# Temporales
+tmp/

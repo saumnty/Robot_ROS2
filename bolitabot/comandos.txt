@@ -1,0 +1,48 @@
+//Insertar Robot a gazebo
+gz service -s /world/default/create \
+--reqtype gz.msgs.EntityFactory \
+--reptype gz.msgs.Boolean \
+--timeout 300 \
+--req 'sdf_filename: "/root/mis_robots/bolitabot/model.sdf"'
+
+//Script para puro ROS2
+saumnty@saumnty:~$ cat ~/pt.sh
+#!/bin/bash
+
+xhost +local:docker > /dev/null 2>&1
+docker rm -f robot 2>/dev/null
+
+# Crear contenedor en background
+docker run -dit \
+--name robot \
+-e DISPLAY=$DISPLAY \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+-v ~/mis_robots:/root/mis_robots \
+--network host \
+osrf/ros:jazzy-desktop
+
+sleep 2
+
+docker exec robot bash -c "
+source /opt/ros/jazzy/setup.bash
+export LIBGL_ALWAYS_SOFTWARE=1
+cd ~/mis_robots/bolitabot
+gz sim bolitabot_world.sdf -r
+" &
+
+sleep 3
+
+docker exec robot bash -c "
+source /opt/ros/jazzy/setup.bash
+ros2 run ros_gz_bridge parameter_bridge \
+/model/bolitabot/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist
+" &
+
+sleep 3
+
+docker exec robot bash -c "
+source /opt/ros/jazzy/setup.bash
+ros2 topic pub /model/bolitabot/cmd_vel geometry_msgs/msg/Twist \
+\"{linear: {x: 1.0}, angular: {z: 0.2}}\" --rate 10
+"
+
