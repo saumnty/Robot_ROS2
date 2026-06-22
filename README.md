@@ -17,7 +17,7 @@ Para ejecutar este proyecto sin problemas, necesitas tener instaladas las siguie
 
 > **Nota sobre Docker:** Toda la instalación de ROS 2 (Jazzy) y Gazebo ya está empaquetada o se autoconfigura en el contenedor. No necesitas instalar ROS nativamente en tu PC.
 
-# 🚀 Cómo Ejecutar la Simulación
+## 🚀 Cómo Ejecutar la Simulación
 
 **1. Lanzar el entorno (Servidor y Motor Físico)**
 El script principal de Docker está configurado para permitirte elegir el entorno de simulación. En la raíz de este repositorio, asegúrate de darle permisos de ejecución al script:
