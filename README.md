@@ -42,7 +42,7 @@ A continuación, lanza el script. Tienes dos opciones de mundo:
 
 
 
-> 💡 **Tip de Velocidad:** Si notas que el script tarda varios segundos descargando paquetes (`apt`), puedes hacer que el arranque sea casi instantáneo siguiendo las instrucciones en [⚡ Optimización del Inicio (Docker)](#optimización-del-inicio-docker) al final de este documento.
+> 💡 **Tip de Velocidad:** Si notas que el script tarda varios segundos descargando paquetes (`apt`), puedes hacer que el arranque sea casi instantáneo siguiendo las instrucciones en [⚡ Optimización del Inicio (Docker)](#-optimización-del-inicio-docker) al final de este documento.
 
 **2. Iniciar el Cerebro (MATLAB)**
 
@@ -50,7 +50,7 @@ A continuación, lanza el script. Tienes dos opciones de mundo:
 2. Da clic derecho sobre la carpeta `bolitabot`, selecciona **"Add to Path"** y luego haz clic en **"Selected Folders and Subfolders"**. Esto es crucial para que MATLAB detecte todas las funciones.
 3. Abre el modelo de Simulink (`controlador_trebol.slx` o equivalente).
 4. Asegúrate de que la terminal de Docker ya imprimió `"--> Abriendo canal Full-Duplex para MATLAB..."`.
-5. ¡Dale a **Run** en Simulink! *(Si obtienes un error relacionado con Python, consulta la sección de [🔧 Solución de problemas comunes](#solución-de-problemas-comunes)).*
+5. ¡Dale a **Run** en Simulink! *(Si obtienes un error relacionado con Python, consulta la sección de [🔧 Solución de problemas comunes](#-solución-de-problemas-comunes)).*
 
 ---
 
