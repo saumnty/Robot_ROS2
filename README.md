@@ -102,18 +102,18 @@ Debido a que el script destruye el contenedor en cada reinicio para evitar confl
 
 1. Ejecuta el entorno normalmente una vez con `./pt_run.sh`.
 2. Mientras la simulación esté corriendo (y ya haya terminado de instalar Gazebo), abre **una nueva terminal** en tu computadora y ejecuta:
-```bash
-docker commit robot osrf/ros:jazzy-desktop-gz
-```
-
-*(Esto empaquetará el contenedor actual en una nueva imagen local. Puede tardar un par de minutos).*
-3. Abre el archivo `pt_run.sh` con tu editor de texto y busca la línea que define la imagen de Docker (alrededor de la línea 30):
-```bash
-# Cambia esto:
-osrf/ros:jazzy-desktop \
-
-# Por esto:
-osrf/ros:jazzy-desktop-gz \
-```
+    ```bash
+    docker commit robot osrf/ros:jazzy-desktop-gz
+    ```
+    
+    *(Esto empaquetará el contenedor actual en una nueva imagen local. Puede tardar un par de minutos).*
+3. Abre el archivo `pt_run.sh` con tu editor de texto y busca la línea que define la imagen de Docker (alrededor de la línea 35):
+    ```bash
+    # Cambia esto:
+    osrf/ros:jazzy-desktop \
+    
+    # Por esto:
+    osrf/ros:jazzy-desktop-gz \
+    ```
 
 A partir de ahora, tu script arrancará usando la imagen con Gazebo preinstalado y saltará automáticamente el paso de descargas.
