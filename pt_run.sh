@@ -32,7 +32,7 @@ docker run -d \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   -v /home/$USER/mis_robots/bolitabot:/root/mis_robots/bolitabot \
   --device /dev/dri:/dev/dri \
-  osrf/ros:jazzy-desktop-gz \
+  osrf/ros:jazzy-desktop \
   sleep infinity
 
 # 4. Ejecución Unificada dentro de Docker
