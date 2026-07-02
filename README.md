@@ -43,7 +43,7 @@ A continuación, lanza el script. Tienes dos opciones de mundo:
 ./pt_run.sh cuarto
 ```
 
-> **Tip de Velocidad:** Si notas que el script tarda varios segundos descargando paquetes (`apt`), puedes hacer que el arranque sea casi instantáneo siguiendo las instrucciones en [⚡ Optimización del Inicio (Docker)](#-optimización-del-inicio-docker) al final de este documento.
+> **Tip de Velocidad:** Si notas que el script tarda varios segundos descargando paquetes (`apt`), puedes hacer que el arranque sea casi instantáneo siguiendo las instrucciones en [ Optimización del Inicio (Docker)](#-optimización-del-inicio-docker) al final de este documento.
 
 **2. Iniciar el Cerebro (MATLAB)**
 
