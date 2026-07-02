@@ -1,12 +1,13 @@
-# Diseño y Validación de Estrategia de Control Adaptativo/Inteligente para Robots Móviles mediante co-simulación (ROS2, Gazebo y MATLAB/Simulink) 🤖🚗
+# Diseño y Validación de Estrategia de Control Adaptativo/Inteligente para Robots Móviles mediante co-simulación (ROS2, Gazebo y MATLAB/Simulink) 
 
 Este repositorio contiene la arquitectura de simulación en lazo cerrado (Full-Duplex) para el robot **Bolitabot**. Permite controlar al robot en un entorno virtual 3D mientras se calculan sus trayectorias matemáticas en tiempo real.
 
-## 🌟 Arquitectura del Sistema
-El proyecto conecta **MATLAB/Simulink** (cerebro matemático) con **Gazebo Harmonic / ROS 2** (motor físico) a través de una red TCP/IP y un nodo puente (Bridge) en Python. 
+## Arquitectura del Sistema
+
+El proyecto conecta **MATLAB/Simulink** (cerebro matemático) con **Gazebo Harmonic / ROS 2** (motor físico) a través de una red TCP/IP y un nodo puente (Bridge) en Python.
 El robot sigue trayectorias generadas mediante **Splines Cúbicos de Hermite**, utilizando un controlador de punto adelantado (*Look-ahead point*).
 
-## 🛠️ Requisitos Previos e Instalación
+## Requisitos Previos e Instalación
 
 Para ejecutar este proyecto sin problemas, necesitas tener instaladas las siguientes herramientas:
 
@@ -17,10 +18,11 @@ Para ejecutar este proyecto sin problemas, necesitas tener instaladas las siguie
 
 > **Nota sobre Docker:** Toda la instalación de ROS 2 (Jazzy) y Gazebo ya está empaquetada o se autoconfigura en el contenedor. No necesitas instalar ROS nativamente en tu PC.
 
-## 🚀 Cómo Ejecutar la Simulación
+## Cómo Ejecutar la Simulación
 
 **1. Lanzar el entorno (Servidor y Motor Físico)**
 El script principal de Docker está configurado para permitirte elegir el entorno de simulación. En la raíz de este repositorio, asegúrate de darle permisos de ejecución al script:
+
 ```bash
 chmod +x pt_run.sh
 ```
@@ -28,21 +30,20 @@ chmod +x pt_run.sh
 A continuación, lanza el script. Tienes dos opciones de mundo:
 
 * **Opción A: Mundo Vacío (Plano de pruebas)** Es el entorno por defecto (`bolitabot_void.sdf`). Ideal para depurar trayectorias matemáticas puras (como el trébol) sin obstáculos.
+
 ```bash
 ./pt_run.sh
 # o explícitamente:
 ./pt_run.sh vacio
 ```
 
-
 * **Opción B: Cuarto Piso** Carga el mundo arquitectónico completo (`bolitabot_world.sdf`). Ideal para probar el desempeño en un entorno real.
+
 ```bash
 ./pt_run.sh cuarto
 ```
 
-
-
-> 💡 **Tip de Velocidad:** Si notas que el script tarda varios segundos descargando paquetes (`apt`), puedes hacer que el arranque sea casi instantáneo siguiendo las instrucciones en [⚡ Optimización del Inicio (Docker)](#-optimización-del-inicio-docker) al final de este documento.
+> **Tip de Velocidad:** Si notas que el script tarda varios segundos descargando paquetes (`apt`), puedes hacer que el arranque sea casi instantáneo siguiendo las instrucciones en [⚡ Optimización del Inicio (Docker)](#-optimización-del-inicio-docker) al final de este documento.
 
 **2. Iniciar el Cerebro (MATLAB)**
 
@@ -50,11 +51,11 @@ A continuación, lanza el script. Tienes dos opciones de mundo:
 2. Da clic derecho sobre la carpeta `bolitabot`, selecciona **"Add to Path"** y luego haz clic en **"Selected Folders and Subfolders"**. Esto es crucial para que MATLAB detecte todas las funciones.
 3. Abre el modelo de Simulink (`controlador_trebol.slx` o equivalente).
 4. Asegúrate de que la terminal de Docker ya imprimió `"--> Abriendo canal Full-Duplex para MATLAB..."`.
-5. ¡Dale a **Run** en Simulink! *(Si obtienes un error relacionado con Python, consulta la sección de [🔧 Solución de problemas comunes](#-solución-de-problemas-comunes)).*
+5. ¡Dale a **Run** en Simulink! *(Si obtienes un error relacionado con Python, consulta la sección de [Solución de problemas comunes](#-solución-de-problemas-comunes)).*
 
 ---
 
-## 📁 Estructura del Repositorio
+## Estructura del Repositorio
 
 * `pt_run.sh`: Script principal de automatización de Docker con selector de mundos y configuración de entorno.
 * `meshes/`: Carpeta con los modelos 3D (colladas/STLs), texturas e imágenes necesarias para renderizar el escenario arquitectónico (cuarto piso) en Gazebo.
@@ -70,7 +71,7 @@ A continuación, lanza el script. Tienes dos opciones de mundo:
 
 ---
 
-## 🔧 Solución de problemas comunes
+## Solución de problemas comunes
 
 **Error de Python en MATLAB**
 Si al darle a *Run* en Simulink, la simulación se detiene y la *Command Window* de MATLAB muestra el siguiente error:
@@ -96,24 +97,26 @@ Una vez ejecutado, vuelve a darle a Run en Simulink y funcionará perfectamente.
 
 ---
 
-## ⚡ Optimización del Inicio (Docker)
+## Optimización del Inicio (Docker)
 
 Debido a que el script destruye el contenedor en cada reinicio para evitar conflictos, la imagen base vuelve a descargar e instalar Gazebo vía `apt` cada vez que se ejecuta. Para congelar esta instalación y reducir el tiempo de carga a **solo 3 segundos**, realiza este procedimiento por única vez:
 
 1. Ejecuta el entorno normalmente una vez con `./pt_run.sh`.
 2. Mientras la simulación esté corriendo (y ya haya terminado de instalar Gazebo), abre **una nueva terminal** en tu computadora y ejecuta:
-    ```bash
-    docker commit robot osrf/ros:jazzy-desktop-gz
-    ```
-    
-    *(Esto empaquetará el contenedor actual en una nueva imagen local. Puede tardar un par de minutos).*
+
+   ```bash
+   docker commit robot osrf/ros:jazzy-desktop-gz
+   ```
+
+   *(Esto empaquetará el contenedor actual en una nueva imagen local. Puede tardar un par de minutos).*
 3. Abre el archivo `pt_run.sh` con tu editor de texto y busca la línea que define la imagen de Docker (alrededor de la línea 35):
-    ```bash
-    # Cambia esto:
-    osrf/ros:jazzy-desktop \
-    
-    # Por esto:
-    osrf/ros:jazzy-desktop-gz \
-    ```
+
+   ```bash
+   # Cambia esto:
+   osrf/ros:jazzy-desktop \
+
+   # Por esto:
+   osrf/ros:jazzy-desktop-gz \
+   ```
 
 A partir de ahora, tu script arrancará usando la imagen con Gazebo preinstalado y saltará automáticamente el paso de descargas.
