@@ -1,4 +1,4 @@
-# Diseño y Validación de Estrategia de Control Adaptativo/Inteligente para Robots Móviles mediante co-simulación (ROS2, Gazebo y MATLAB/Simulink) 
+# Control Inteligente para Robots Móviles mediante co-simulación
 
 Este repositorio contiene la arquitectura de simulación en lazo cerrado (Full-Duplex) para el robot **Bolitabot**. Permite controlar al robot en un entorno virtual 3D mientras se calculan sus trayectorias matemáticas en tiempo real.
 
